@@ -26,6 +26,7 @@ THREE.VREffect = function ( renderer, done ) {
 	var cameraRight = new THREE.PerspectiveCamera();
 
 	this._renderer = renderer;
+	this._devicePixelRatio = renderer.getPixelRatio();
 
 	this._init = function() {
 		var self = this;
@@ -97,8 +98,8 @@ THREE.VREffect = function ( renderer, done ) {
 		var leftEyeTranslation = this.leftEyeTranslation;
 		var rightEyeTranslation = this.rightEyeTranslation;
 		var renderer = this._renderer;
-		var rendererWidth = renderer.context.drawingBufferWidth;
-		var rendererHeight = renderer.context.drawingBufferHeight;
+		var rendererWidth = renderer.context.drawingBufferWidth / this._devicePixelRatio;
+		var rendererHeight = renderer.context.drawingBufferHeight / this._devicePixelRatio;
 		var eyeDivisionLine = rendererWidth / 2;
 
 		renderer.enableScissorTest( true );
@@ -251,3 +252,4 @@ THREE.VREffect = function ( renderer, done ) {
 	};
 
 };
+
